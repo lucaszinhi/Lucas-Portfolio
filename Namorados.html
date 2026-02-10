@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Para Você ❤️</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background: linear-gradient(135deg,#ff5fa2,#ff9acb);
+  font-family: Arial, sans-serif;
+  overflow:hidden;
+  color:white;
+  text-align:center;
+}
+
+.page{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.hidden{
+  display:none;
+}
+
+button{
+  padding:15px 35px;
+  font-size:22px;
+  border:none;
+  border-radius:30px;
+  margin:10px;
+  cursor:pointer;
+}
+
+.sim{
+  background:white;
+  color:#ff4d88;
+}
+
+.nao{
+  background:#ff1a1a;
+  color:white;
+}
+
+.heart{
+  position:absolute;
+  font-size:24px;
+  animation: subir linear forwards;
+}
+
+@keyframes subir{
+  from{
+    transform:translateY(100vh);
+    opacity:1;
+  }
+  to{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page" id="p1">
+  <h1>Para a garota que eu amo ❤️</h1>
+  <p>Eu fiz isso só pra você</p>
+  <button class="sim" onclick="proximo()">Clique aqui</button>
+</div>
+
+<div class="page hidden" id="p2">
+  <h1>Nossa História 💕</h1>
+  <p>Desde que você entrou na minha vida, tudo ficou mais bonito.</p>
+  <p>Eu penso em você todos os dias.</p>
+  <button class="sim" onclick="proximo()">Continuar</button>
+</div>
+
+<div class="page hidden" id="p3">
+  <h1>Você quer continuar essa história comigo? ❤️</h1>
+  <div>
+    <button class="sim" onclick="sim()">Sim</button>
+    <button class="nao" onmouseover="fugir(this)">Não</button>
+  </div>
+</div>
+
+<script>
+let pagina = 1;
+
+function proximo(){
+  document.getElementById("p"+pagina).classList.add("hidden");
+  pagina++;
+  document.getElementById("p"+pagina).classList.remove("hidden");
+}
+
+function sim(){
+  document.body.innerHTML = "<h1 style='margin-top:40vh'>Eu te amo para sempre ❤️</h1>";
+}
+
+function fugir(botao){
+  botao.style.position="absolute";
+  botao.style.left=Math.random()*80+"%";
+  botao.style.top=Math.random()*80+"%";
+}
+
+function criarCoracao(){
+  const h = document.createElement("div");
+  h.classList.add("heart");
+  h.innerHTML="❤️";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.animationDuration = (3 + Math.random()*5) + "s";
+  document.body.appendChild(h);
+
+  setTimeout(()=>{h.remove()},8000);
+}
+
+setInterval(criarCoracao,300);
+</script>
+
+</body>
+</html>
